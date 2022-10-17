@@ -22,15 +22,12 @@ void print_time(int h, int m, int s) {
 void timer(int h, int m, int s) {
 	if (h == -1 && m == -1 && s == -1) return;
 	system("clear");
-	//printf("Hours: %d\nMinutes: %d\nSeconds: %d\n", h, m, s);
 	print_time(h, m, s);
 	sleep(1);
 	timer(h-1,m-1,s-1);
 }
 
-int main(int argc, char* argv[]) {
+void main(int argc, char* argv[]) {
 	timer(atoi(argv[1]) / 10000, (atoi(argv[1]) % 10000) / 100, atoi(argv[1]) % 100);
-	system("clear");
-	printf("Completed");
-	return 1;
+	return;
 }
