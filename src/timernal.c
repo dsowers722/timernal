@@ -1,9 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char *time;
+int time;
 
 int main(int argc, char* argv[]) {
-	time = argv[1];
+	time = atoi(argv[1]);
+	printf("%d\n", time);
 	return 1;
+}
+
+void start_timer() {
+
+}
+
+int print_time(int h, int m, int s) {
+	system("cls");
+
 }
