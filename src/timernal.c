@@ -32,11 +32,24 @@ void timer(int h, int m, int s) {
 		h += m / 60;
 		m %= 60;
 	}
-	if (s == -1) return;
+	if ((s == -1) && ((m > 0) || (h > 0))) {
+		if (m > 0) {
+			s = 59;
+			m--;
+		} else {
+			m = 59;
+			s = 59;
+			h--;
+		}
+	}
+	if (s == -1) {
+		return;
+	}
+	
 	system("clear");
 	print_time(h, m, s);
 	sleep(1);
-	timer(h-1,m-1,s-1);
+	timer(h,m,s-1);
 } // Pass the correct time values into the printing function and handle the mechanics of a timer.
 
 void main(int argc, char* argv[]) {
