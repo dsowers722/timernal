@@ -55,6 +55,6 @@ void timer(int h, int m, int s) {
 void main(int argc, char* argv[]) {
 	timer(atoi(argv[1]) / 10000, (atoi(argv[1]) % 10000) / 100, atoi(argv[1]) % 100);
 	system("clear");
-	printf("Completed\n");
+	printf("Completed\a\n");
 	return;
 } // main function
