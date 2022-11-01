@@ -2,6 +2,18 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+struct study_time {
+	int hours;
+	int minutes;
+	int seconds;
+};
+
+struct break_time {
+	int hours;
+	int minutes;
+	int seconds;
+};
+
 const char *characters[][5] = {{" 0000 ", "00  00", "00  00", "00  00", " 0000 "},
 								{"1111  ", "  11  ", "  11  ", "  11  ", "111111"},
 								{" 2222 ", "22  22", "   22 ", "  22  ", "222222"},
@@ -52,8 +64,27 @@ void timer(int h, int m, int s) {
 	timer(h,m,s-1);
 } // Pass the correct time values into the printing function and handle the mechanics of a timer.
 
+void pomodoro(struct study_time study_length, struct break_time break_length, int num_sessions) {
+	while (num_sessions > 0) {
+		timer(study_length.hours, study_length.minutes, study_length.seconds);
+		num_sessions--;
+		if (num_sessions == 0) {
+			break;
+		}
+		timer(break_length.hours, break_length.minutes, break_length.seconds);
+
+	}
+}
+
 void main(int argc, char* argv[]) {
-	timer(atoi(argv[1]) / 10000, (atoi(argv[1]) % 10000) / 100, atoi(argv[1]) % 100);
+	struct study_time s_time = {atoi(argv[1]) / 10000, (atoi(argv[1]) % 10000) / 100, atoi(argv[1]) % 100};
+	if ((argv[2] != NULL) && (argv[3] != NULL)) {
+		int sessions = atoi(argv[3]);
+		struct break_time b_time = {atoi(argv[2]) / 10000, (atoi(argv[2]) % 10000) / 100, atoi(argv[2]) % 100};
+		pomodoro(s_time, b_time, sessions);
+	} else {
+		timer(s_time.hours, s_time.minutes, s_time.seconds);
+	}
 	system("clear");
 	printf("Completed\a\n");
 	return;
