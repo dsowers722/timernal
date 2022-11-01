@@ -14,6 +14,8 @@ struct break_time {
 	int seconds;
 };
 
+char mode;
+
 const char *characters[][5] = {{" 0000 ", "00  00", "00  00", "00  00", " 0000 "},
 								{"1111  ", "  11  ", "  11  ", "  11  ", "111111"},
 								{" 2222 ", "22  22", "   22 ", "  22  ", "222222"},
@@ -27,6 +29,11 @@ const char *characters[][5] = {{" 0000 ", "00  00", "00  00", "00  00", " 0000 "
 const char *dash[5] = {"  ", "  ", "--", "  ", "  "};
 
 void print_time(int h, int m, int s) {
+	if (mode == 'b') {
+			printf("\t\t\t\tBREAK\n\n");
+		} else {
+			printf("\t\t\t\tSTUDY\n\n");
+		}
 	for (int i = 0; i < 5; i++) {
 		printf("%s    %s    %s    %s    %s    %s    %s    %s\n",
 			   characters[h / 10][i], characters[h % 10][i], dash[i],
@@ -66,11 +73,13 @@ void timer(int h, int m, int s) {
 
 void pomodoro(struct study_time study_length, struct break_time break_length, int num_sessions) {
 	while (num_sessions > 0) {
+		mode = 's';
 		timer(study_length.hours, study_length.minutes, study_length.seconds);
 		num_sessions--;
 		if (num_sessions == 0) {
 			break;
 		}
+		mode = 'b';
 		timer(break_length.hours, break_length.minutes, break_length.seconds);
 
 	}
