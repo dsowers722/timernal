@@ -95,6 +95,7 @@ void main(int argc, char* argv[]) {
 		timer(s_time.hours, s_time.minutes, s_time.seconds);
 	}
 	system("clear");
+	system("spd-say completed");
 	printf("Completed\a\n");
 	return;
 } // main function
